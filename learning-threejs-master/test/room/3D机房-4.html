@@ -5,6 +5,7 @@
     <title>room-1</title>
     <script type="text/javascript" src="../../libs/three.js"></script>
     <script type="text/javascript" src="../../libs/literally/jquery-1.8.2.js"></script>
+    <script type="text/javascript" src="../../libs/VTKLoader.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
@@ -93,11 +94,20 @@
             scene.add(cube);
         }
 
+        //添加门
         addDoors(doors,scene);
 
-
-
-//        addDoor(scene, new Door("door-1",5, 8, 3, 0, 8 / 2, floorHeight / 2, 0));
+        var loader = new THREE.VTKLoader();
+        var group = new THREE.Object3D();
+        loader.load("../../assets/models/moai_fixed.vtk", function (geometry) {
+            var mat = new THREE.MeshLambertMaterial({color: 0xaaffaa});
+            group = new THREE.Mesh(geometry, mat);
+            group.scale.set(10, 10, 10);
+            group.position.x=10
+            group.position.y=15/2;
+            group.position.z=0;
+            scene.add(group);
+        });
 
         addAmbientLight(scene);
 
