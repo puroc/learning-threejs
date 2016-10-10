@@ -68,46 +68,6 @@
         return render;
     }
 
-    function drawWall() {
-        // create a basic shape
-        var shape = new THREE.Shape();
-
-//        shape.moveTo(5, 5);
-//        shape.lineTo(20, 5);
-//        shape.lineTo(20, 20);
-//        shape.lineTo(5, 20);
-
-        shape.moveTo(5, 5);
-        shape.lineTo(6, 5);
-        shape.lineTo(6, 15);
-        shape.lineTo(5, 15);
-
-        return shape;
-    }
-
-    function createMesh(geom) {
-
-//        geom.applyMatrix(new THREE.Matrix4().makeTranslation(-20, 0, 0));
-//
-////             assign two materials
-//        var meshMaterial = new THREE.MeshNormalMaterial({
-//            shading: THREE.FlatShading,
-//            transparent: true,
-//            opacity: 0.7
-//        });
-//
-//        var wireFrameMat = new THREE.MeshBasicMaterial();
-//        wireFrameMat.wireframe = true;
-//
-//        // create a multimaterial
-//        var mesh = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial]);
-
-        var material = new THREE.MeshLambertMaterial({color: '#F8F8FF'});
-        var mesh = new THREE.Mesh(geom, material);
-
-        return mesh;
-    }
-
     function init() {
         var scene = new THREE.Scene();
 
@@ -121,21 +81,13 @@
 
         addSpotLight(scene, 0 - planeWidth, planeHeight * 2, planeHeight * 2);
 
-
-        var options = {
-            amount: 15,
-            bevelThickness: 15,
-            bevelSize: 0.5,
-            bevelEnabled: true,
-            bevelSegments: 3,
-            bevelEnabled: true,
-            curveSegments: 12,
-            steps: 1
-        };
-
-        var shape = createMesh(new THREE.ExtrudeGeometry(drawWall(), options));
-
-        scene.add(shape);
+        var material = new THREE.MeshLambertMaterial({color: '#F0F0F0'});
+        var geom = new THREE.BoxGeometry(5, 8, 3);
+        var cube = new THREE.Mesh(geom, material);
+        cube.position.y = 4;
+        cube.rotation.y = THREE.Math.degToRad( 90 );
+//        cube.castShadow = true;
+        scene.add(cube);
 
         var camera = createCamera(scene, 0, cameraHeight, planeHeight);
 
