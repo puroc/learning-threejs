@@ -36,6 +36,21 @@
         scene.add(plane);
     }
 
+    function createMesh(geom, imageFile) {
+        var texture = THREE.ImageUtils.loadTexture("../assets/textures/general/" + imageFile);
+        var mat = new THREE.MeshPhongMaterial();
+        mat.map = texture;
+
+        var mesh = new THREE.Mesh(geom, mat);
+        return mesh;
+    }
+
+    function addPlane2(){
+        var planeGeometry = new THREE.PlaneGeometry(60, 50, 1, 1);
+        var floor = createMesh(planeGeometry,"floor-wood.jpg");
+        scene.add(floor);
+    }
+
     function addSpotLight(scene) {
         // add spotlight for the shadows
         var spotLight = new THREE.SpotLight('#FFFFFF');
