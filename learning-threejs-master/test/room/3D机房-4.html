@@ -6,6 +6,7 @@
     <script type="text/javascript" src="../../libs/three.js"></script>
     <script type="text/javascript" src="../../libs/literally/jquery-1.8.2.js"></script>
     <script type="text/javascript" src="../../libs/VTKLoader.js"></script>
+    <script type="text/javascript" src="../../libs/OrbitControls.js"></script>
     <style>
         body {
             /* set margin to 0 and overflow to hidden, to go fullscreen */
@@ -24,15 +25,15 @@
 <script type="text/javascript">
 
     var walls = "{  \"wall\":[ \
-        {\"id\":\"wall-1\",\"width\":\"50\",\"height\":\"8\",\"depth\":\"3\",\"x\":\"-30\",\"y\":\"4\",\"z\":\"0\",\"angle\":\"90\"},\
-        {\"id\":\"wall-2\",\"width\":\"60\",\"height\":\"8\",\"depth\":\"3\",\"x\":\"0\",\"y\":\"4\",\"z\":\"-25\",\"angle\":\"0\"},\
-        {\"id\":\"wall-3\",\"width\":\"50\",\"height\":\"8\",\"depth\":\"3\",\"x\":\"30\",\"y\":\"4\",\"z\":\"0\",\"angle\":\"90\"},\
-        {\"id\":\"wall-4\",\"width\":\"60\",\"height\":\"8\",\"depth\":\"3\",\"x\":\"0\",\"y\":\"4\",\"z\":\"25\",\"angle\":\"0\"}\
+        {\"id\":\"wall-1\",\"width\":\"50\",\"height\":\"8\",\"depth\":\"1\",\"x\":\"-30\",\"y\":\"4\",\"z\":\"0\",\"angle\":\"90\"},\
+        {\"id\":\"wall-2\",\"width\":\"60\",\"height\":\"8\",\"depth\":\"1\",\"x\":\"0\",\"y\":\"4\",\"z\":\"-25\",\"angle\":\"0\"},\
+        {\"id\":\"wall-3\",\"width\":\"50\",\"height\":\"8\",\"depth\":\"1\",\"x\":\"30\",\"y\":\"4\",\"z\":\"0\",\"angle\":\"90\"},\
+        {\"id\":\"wall-4\",\"width\":\"60\",\"height\":\"8\",\"depth\":\"1\",\"x\":\"0\",\"y\":\"4\",\"z\":\"25\",\"angle\":\"0\"}\
         ]}";
 
     var doors = "{  \"door\":[ \
-        {\"id\":\"door-1\",\"width\":\"10\",\"height\":\"8\",\"depth\":\"3\",\"x\":\"0\",\"y\":\"4\",\"z\":\"25\",\"angle\":\"0\"},\
-        {\"id\":\"door-2\",\"width\":\"5\",\"height\":\"8\",\"depth\":\"3\",\"x\":\"20\",\"y\":\"4\",\"z\":\"-25\",\"angle\":\"0\"}\
+        {\"id\":\"door-1\",\"width\":\"10\",\"height\":\"8\",\"depth\":\"1\",\"x\":\"0\",\"y\":\"4\",\"z\":\"25\",\"angle\":\"0\"},\
+        {\"id\":\"door-2\",\"width\":\"5\",\"height\":\"8\",\"depth\":\"1\",\"x\":\"20\",\"y\":\"4\",\"z\":\"-25\",\"angle\":\"0\"}\
         ]}";
 
     function Wall(id, width, height, depth, x, y, z, angle) {
@@ -115,6 +116,8 @@
 
         var camera = createCamera(scene, 0, cameraHeight, floorHeight);
 
+        var orbit = new THREE.OrbitControls(camera);
+
         var webGLRenderer = createRender(scene, camera);
 
         render();
@@ -167,6 +170,7 @@
         }
 
         function render() {
+            orbit.update();
             requestAnimationFrame(render);
             webGLRenderer.render(scene, camera);
         }

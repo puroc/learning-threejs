@@ -64,9 +64,11 @@
         var loader = new THREE.ColladaLoader();
 
         var mesh;
+//        loader.load("../assets/models/my/456.dae", function (result) {
         loader.load("../assets/models/dae/Truck_dae.dae", function (result) {
+//        loader.load("../assets/models/dae/456.dae", function (result) {
             mesh = result.scene.children[0].children[0].clone();
-            mesh.scale.set(4, 4, 4);
+            mesh.scale.set(1, 1, 1);
             scene.add(mesh);
         });
 
